@@ -14,7 +14,7 @@ const MarkdownRenderer = () => {
 
   useEffect(() => {
     const fetchMarkdown = async () => {
-      const response = await fetch('./src/markdown/sample.md');
+      const response = await fetch('./sample.md');
       const text = await response.text();
       setMarkdownText(text);
     };
