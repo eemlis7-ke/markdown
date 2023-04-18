@@ -1,7 +1,7 @@
 import React, { ReactNode, useState, useEffect } from 'react';
 import Markdown from 'markdown-to-jsx';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
-import { anOldHope as theme } from 'react-syntax-highlighter/dist/esm/styles/hljs';
+import { irBlack as theme } from 'react-syntax-highlighter/dist/esm/styles/hljs';
 // ここでテーマ変更 https://k8shiro.github.io/ReactCompareCodeHighlighter/
 
 import styles from './markdown-styles.module.scss';
@@ -56,9 +56,7 @@ const MarkdownRenderer = () => {
   return (
     <div>
       <Markdown options={options}>{markdownText}</Markdown>
-      <CodeBlock language="sass" codeString={`
-@import '../src/style/config';
-
+      <CodeBlock language="sass" codeString={`@import '../src/style/config';
 
 @keyframes slideIn {
   0% {
@@ -70,7 +68,6 @@ const MarkdownRenderer = () => {
     opacity: 1;
   }
 }
-
 .article-box.new-article {
   animation-name: slideIn;
   animation-duration: 0.2s; // アニメーションの長さを増やします
@@ -82,10 +79,8 @@ const MarkdownRenderer = () => {
 
 .article-box.new-article.slide-in {
   opacity: 1;
-}
-      `} />
-      <CodeBlock language="javascript" codeString={`
-import { anOldHope as theme } from 'react-syntax-highlighter/dist/esm/styles/hljs';
+}`} />
+      <CodeBlock language="javascript" codeString={`import { anOldHope as theme } from 'react-syntax-highlighter/dist/esm/styles/hljs';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 import { FiClipboard, FiCheck } from 'react-icons/fi';
 import './CodeBlock.scss';
@@ -110,7 +105,7 @@ const CodeBlock: React.FC<CodeBlockProps> = ({ language, codeString }) => {
   return (
     <div className="code-block">
         <div className="code-heading">
-            <div className="language-name">{displayLanguage}</div> {/* displayLanguage を使用 */}
+            <div className="language-name">{displayLanguage}</div> {/* *************************************************************************************displayLanguage を使用 */}
             <div className="copy-button">
                 <CopyToClipboard text={codeString} onCopy={handleCopy}>
                 <button>
@@ -128,8 +123,40 @@ const CodeBlock: React.FC<CodeBlockProps> = ({ language, codeString }) => {
   );
 };
 
-export default CodeBlock;
-      `} />
+export default CodeBlock;`} />
+<CodeBlock language="python" codeString={`# In[1]
+
+def geometric_sum_approximation(a, r, n):
+    """
+    等比級数 a + ar + ar^2 + ar^3 + ... の近似値を計算する関数
+    
+    Parameters
+    ----------
+    a : float
+        等比級数の初項
+    r : float
+        等比級数の公比
+    n : int
+        級数を打ち切る項数
+    
+    Returns
+    -------
+    approx_sum : float
+        等比級数の近似値
+    """
+    approx_sum = 0
+    for i in range(n):
+        approx_sum += a * (r ** i)
+    return approx_sum`} />
+<CodeBlock language="mermaid" codeString={`sequenceDiagram
+Alice ->> Bob: Hello Bob, how are you?
+Bob-->>John: How about you John?
+Bob--x Alice: I am good thanks!
+Bob-x John: I am good thanks!
+Note right of John: Bob thinks a long<br/>long time, so long<br/>that the text does<br/>not fit on a row.
+
+Bob-->Alice: Checking with John...
+Alice->John: Yes... John, how are you?`} />
     </div>
   );
 };

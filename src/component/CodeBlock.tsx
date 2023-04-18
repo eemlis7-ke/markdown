@@ -2,10 +2,11 @@
 import React, { useState } from 'react';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 // import { dark as theme } from 'react-syntax-highlighter/dist/esm/styles/prism'; // テーマのインポートを変更
-import { anOldHope as theme } from 'react-syntax-highlighter/dist/esm/styles/hljs';
+import { irBlack as theme } from 'react-syntax-highlighter/dist/esm/styles/hljs';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 import { FiClipboard, FiCheck } from 'react-icons/fi';
 import './CodeBlock.scss';
+import "./prism-theme.css";
 
 interface CodeBlockProps {
   language: string | undefined;
@@ -19,7 +20,7 @@ const CodeBlock: React.FC<CodeBlockProps> = ({ language, codeString }) => {
     setIsCopied(true);
     setTimeout(() => {
       setIsCopied(false);
-    }, 1500);
+    }, 3500);
   };
 
   const displayLanguage = language ? language.replace("lang-", "") : ""; // lang- をカット
@@ -30,7 +31,7 @@ const CodeBlock: React.FC<CodeBlockProps> = ({ language, codeString }) => {
             <div className="language-name">{displayLanguage}</div> {/* displayLanguage を使用 */}
             <div className="copy-button">
                 <CopyToClipboard text={codeString} onCopy={handleCopy}>
-                <button>
+                <button className={isCopied ? 'is-copied' : ''}>
                     {isCopied ? <FiCheck /> : <FiClipboard />}
                     {isCopied ? 'コピーしました' : 'コードをコピー'}
                 </button>
