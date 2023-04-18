@@ -22,7 +22,7 @@ const CodeBlock: React.FC<CodeBlockProps> = ({ language, codeString }) => {
     setIsCopied(true);
     setTimeout(() => {
       setIsCopied(false);
-    }, 3500);
+    }, 5000);
   };
 
   const renderIconByLanguage = () => {
@@ -57,7 +57,6 @@ const CodeBlock: React.FC<CodeBlockProps> = ({ language, codeString }) => {
       <SyntaxHighlighter language={language} style={theme}>
         {codeString}
       </SyntaxHighlighter>
-      
     </div>
   );
 };

@@ -118,7 +118,6 @@ const CodeBlock: React.FC<CodeBlockProps> = ({ language, codeString }) => {
       <SyntaxHighlighter language={language} style={theme}>
         {codeString}
       </SyntaxHighlighter>
-      
     </div>
   );
 };
