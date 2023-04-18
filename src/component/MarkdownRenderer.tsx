@@ -1,10 +1,11 @@
 import React, { ReactNode, useState, useEffect } from 'react';
 import Markdown from 'markdown-to-jsx';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
-import { dark as theme } from 'react-syntax-highlighter/dist/esm/styles/prism';
+import { anOldHope as theme } from 'react-syntax-highlighter/dist/esm/styles/hljs';
 // ここでテーマ変更 https://k8shiro.github.io/ReactCompareCodeHighlighter/
 
 import styles from './markdown-styles.module.scss';
+import "./prism-theme.css";
 import CodeBlock from './CodeBlock';
 
 
@@ -53,7 +54,83 @@ const MarkdownRenderer = () => {
   };
 
   return (
-    <Markdown options={options}>{markdownText}</Markdown>
+    <div>
+      <Markdown options={options}>{markdownText}</Markdown>
+      <CodeBlock language="sass" codeString={`
+@import '../src/style/config';
+
+
+@keyframes slideIn {
+  0% {
+    transform: translateY(10px);
+    opacity: 0.1;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.article-box.new-article {
+  animation-name: slideIn;
+  animation-duration: 0.2s; // アニメーションの長さを増やします
+  animation-timing-function: ease-out; // アニメーションのタイミング関数を変更します
+  animation-fill-mode: both;
+  opacity: 0;
+  will-change: transform, opacity; // 追加
+}
+
+.article-box.new-article.slide-in {
+  opacity: 1;
+}
+      `} />
+      <CodeBlock language="javascript" codeString={`
+import { anOldHope as theme } from 'react-syntax-highlighter/dist/esm/styles/hljs';
+import { CopyToClipboard } from 'react-copy-to-clipboard';
+import { FiClipboard, FiCheck } from 'react-icons/fi';
+import './CodeBlock.scss';
+
+interface CodeBlockProps {
+  language: string | undefined;
+  codeString: string;
+}
+
+const CodeBlock: React.FC<CodeBlockProps> = ({ language, codeString }) => {
+  const [isCopied, setIsCopied] = useState(false);
+
+  const handleCopy = () => {
+    setIsCopied(true);
+    setTimeout(() => {
+      setIsCopied(false);
+    }, 1500);
+  };
+
+  const displayLanguage = language ? language.replace("lang-", "") : ""; // lang- をカット
+
+  return (
+    <div className="code-block">
+        <div className="code-heading">
+            <div className="language-name">{displayLanguage}</div> {/* displayLanguage を使用 */}
+            <div className="copy-button">
+                <CopyToClipboard text={codeString} onCopy={handleCopy}>
+                <button>
+                    {isCopied ? <FiCheck /> : <FiClipboard />}
+                    {isCopied ? 'コピーしました' : 'コードをコピー'}
+                </button>
+                </CopyToClipboard>
+            </div>
+        </div>
+      <SyntaxHighlighter language={language} style={theme}>
+        {codeString}
+      </SyntaxHighlighter>
+      
+    </div>
+  );
+};
+
+export default CodeBlock;
+      `} />
+    </div>
   );
 };
 

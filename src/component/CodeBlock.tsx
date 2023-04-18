@@ -1,7 +1,8 @@
 // CodeBlock.tsx
 import React, { useState } from 'react';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
-import { dark as theme } from 'react-syntax-highlighter/dist/esm/styles/prism'; // テーマのインポートを変更
+// import { dark as theme } from 'react-syntax-highlighter/dist/esm/styles/prism'; // テーマのインポートを変更
+import { anOldHope as theme } from 'react-syntax-highlighter/dist/esm/styles/hljs';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 import { FiClipboard, FiCheck } from 'react-icons/fi';
 import './CodeBlock.scss';
