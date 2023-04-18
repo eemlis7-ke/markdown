@@ -6,7 +6,7 @@ import { irBlack as theme } from 'react-syntax-highlighter/dist/esm/styles/hljs'
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 import { FiClipboard, FiCheck } from 'react-icons/fi';
 import { FaPython, FaSass } from "react-icons/fa";
-import { SiJavascript } from "react-icons/Si";
+import { SiJavascript } from "react-icons/si";
 import './CodeBlock.scss';
 import "./prism-theme.css";
 
